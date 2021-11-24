@@ -28,7 +28,7 @@ class HorizontalTimeVolumeItem(CandlestickItem):
         volumes = vals[:, self.datasrc.col_data_offset+1::2].T
         # normalize
         try:
-            f = self.datasrc.period_ns / _get_datasrc(self.ax).period_ns
+            f = self.datasrc.period_ns / functions._get_datasrc(self.ax).period_ns
             times = _pdtime2index(self.ax, times, require_time=True)
         except AssertionError:
             f = 1
