@@ -157,6 +157,7 @@ def _savewindata(win):
     except Exception as e:
         print('Error saving plot:', e)
 
+from ..classes.fin_window import FinWindow
 
 def _internal_windows_only():
      return all(isinstance(win,FinWindow) for win in defs.windows)
@@ -213,6 +214,7 @@ def _add_timestamp_plot(master, prev_ax, viewbox, index, yscale):
     return ax
 
 from ..classes.fin_view_box import FinViewBox
+from ..classes.y_scale import YScale
 
 def _ax_overlay(ax, scale=0.25, yaxis=False):
     '''The scale parameter defines how "high up" on the initial plot this overlay will show.
@@ -305,6 +307,7 @@ def _ax_reset(ax):
     if ax.crosshair is not None:
         ax.crosshair.show()
 
+from ..classes.fin_legend_item import FinLegendItem
 
 def _create_legend(ax):
     if ax.vb.master_viewbox:
