@@ -350,7 +350,7 @@ def fill_between(plot0, plot1, color=None):
 
 def set_x_pos(xmin, xmax, ax=None):
     ax = functions._create_plot(ax=ax, maximize=False)
-    xidx0,xidx1 = _pdtime2index(ax, pd.Series([xmin, xmax]))
+    xidx0,xidx1 = functions._pdtime2index(ax, pd.Series([xmin, xmax]))
     ax.vb.update_y_zoom(xidx0, xidx1)
     functions._repaint_candles()
 
@@ -383,7 +383,7 @@ def add_band(y0, y1, color=defs.band_color, ax=None):
 
 def add_rect(p0, p1, color=defs.band_color, interactive=False, ax=None):
     ax = functions._create_plot(ax=ax, maximize=False)
-    x_pts = _pdtime2index(ax, pd.Series([p0[0], p1[0]]))
+    x_pts = functions._pdtime2index(ax, pd.Series([p0[0], p1[0]]))
     ix = ax.vb.yscale.invxform
     y0,y1 = sorted([p0[1], p1[1]])
     pos  = (x_pts[0], ix(y0))
@@ -401,7 +401,7 @@ def add_line(p0, p1, color=defs.draw_line_color, width=1, style=None, interactiv
     ax = functions._create_plot(ax=ax, maximize=False)
     used_color = functions._get_color(ax, style, color)
     pen = functions._makepen(color=used_color, style=style, width=width)
-    x_pts = _pdtime2index(ax, pd.Series([p0[0], p1[0]]))
+    x_pts = functions._pdtime2index(ax, pd.Series([p0[0], p1[0]]))
     ix = ax.vb.yscale.invxform
     pts = [(x_pts[0], ix(p0[1])), (x_pts[1], ix(p1[1]))]
     if interactive:
@@ -420,7 +420,7 @@ def add_text(pos, s, color=defs.draw_line_color, anchor=(0,0), ax=None):
     text = pg.TextItem(s, color=color, anchor=anchor)
     x = pos[0]
     if ax.vb.datasrc is not None:
-        x = _pdtime2index(ax, pd.Series([pos[0]]))[0]
+        x = functions._pdtime2index(ax, pd.Series([pos[0]]))[0]
     y = ax.vb.yscale.invxform(pos[1])
     text.setPos(x, y)
     text.setZValue(50)
